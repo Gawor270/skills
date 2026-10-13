@@ -27,7 +27,7 @@ Python: `fishjam_client.forward_room_tracks(room.id, composition_client.composit
 6. **Start the composition.**
 7. **Send the starting events**, if the template listens for any. A template only knows what it received through `sendEvent`, so anything it should show from the first frame (a caption, a LIVE badge) has to be sent after start.
 
-Why these options:
+Why these settings:
 
 - **`autostart: false`**: nothing is rendered or sent until `startComposition`, so the output, assets, and forwarding are all in place before the first frame.
 - **`cleanupWithoutInputs: false`**: a room can sit empty, or peers can join late, for longer than the idle cleanup window. Without it the composition could be removed before anyone publishes. The trade-off is that it is never cleaned up for you: delete it when the session ends.

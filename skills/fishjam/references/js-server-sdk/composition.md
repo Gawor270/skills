@@ -100,8 +100,18 @@ await compositionClient.unregisterOutput(compositionId, main);
 ```
 
 - Each output pushes to its own destination, so `show` uses a streamer token of a second livestream room. `updateOutput` applies to static outputs like `main`, never to a template output.
-- `registerTemplateOutput` takes the config with `type` set, and the bundle as a file path or a `Blob`. A path is read from disk, so never pass one taken from user input.
 - `registerOutput(compositionId, outputId, { type, ... })` is the generic form behind `registerWhipOutput` and `registerRtmpOutput`.
+
+### Template outputs
+
+`registerTemplateOutput(compositionId, outputId, config, template)` registers an output and uploads the React template that renders it, in one call. Building the template: `../composition/templates.md`.
+
+- **`config`** is the same object `registerOutput` takes, with `type` set explicitly (`'whip_client'` or `'rtmp_client'`).
+- **`template`** is the built bundle (`dist/App.js`), as a file path or a `Blob`. A path is read from disk and uploaded, so never pass one taken from user input.
+- **`video.initial` and `audio.initial` are placeholders.** The template replaces both scenes on its first render; pass `{ root: { type: 'view' } }` and `{ inputs: [] }`.
+- **Pass `audio` if the output should be heard.** Without it the output has no audio track, whatever the template renders.
+- **Change it with `sendEvent`**, never `updateOutput`: the template owns the scene and its next render replaces your update.
+- **Redeploy a new bundle** with `unregisterOutput`, then `registerTemplateOutput` again. Inputs stay registered; resend the events that carry the template's state.
 
 ## Assets and events
 

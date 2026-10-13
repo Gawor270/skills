@@ -49,10 +49,7 @@ Answer three questions: where the streams come from, where the result goes, and 
 | Source | How it gets in | Read |
 |---|---|---|
 | Peers in a Fishjam room (`../platform/room-types.md`) | Forward the whole room; inputs appear per track | `room-composition.md` |
-| OBS, a browser, or any WHIP publisher | WHIP input; the publisher pushes to a URL you get back | `inputs-and-outputs.md` |
-| A hardware or software RTMP encoder | RTMP input; the encoder pushes to a URL you get back | `inputs-and-outputs.md` |
-| A remote WHEP stream | WHEP input; the composition pulls it | `inputs-and-outputs.md` |
-| A video file | MP4 input by URL, optionally looped | `inputs-and-outputs.md` |
+| Anything else: OBS or another WHIP publisher, an RTMP encoder, a remote WHEP stream, an MP4 file | Register an input of the matching type | `inputs-and-outputs.md` |
 
 ### Where does the result go?
 
