@@ -10,7 +10,7 @@ Inputs bring streams into a composition; outputs push the composed result out. B
 | RTMP | An RTMP encoder pushes to the composition | `registerRtmpInput` | `register_rtmp_input` | Publish URL |
 | WHEP | The composition pulls from a WHEP server | `registerWhepInput` | `register_whep_input` | Nothing |
 | MP4 | The composition downloads a file by URL | `registerMp4Input` | `register_mp4_input` | Video and audio duration |
-| Room tracks | Fishjam forwards every peer's tracks | `fishjamClient.forwardRoomTracks` | `fishjam_client.forward_room_tracks` | Nothing; inputs appear per peer (`room-composition.md`) |
+| Room tracks | Fishjam forwards every peer's tracks from the given room | `fishjamClient.forwardRoomTracks` | `fishjam_client.forward_room_tracks` | Nothing; inputs appear per peer (`room-composition.md`) |
 
 Remove any input with `unregisterInput(compositionId, inputId)` / `unregister_input`.
 
@@ -67,7 +67,7 @@ const { videoDurationMs, audioDurationMs } = await compositionClient.registerMp4
 |---|---|---|---|
 | WHIP | A Fishjam livestream room, or any WHIP server | `registerWhipOutput` | `register_whip_output` |
 | RTMP | YouTube, Twitch, or any RTMP / RTMPS ingest | `registerRtmpOutput` | `register_rtmp_output` |
-| Template | Either of the above, rendered by a template | `registerTemplateOutput` | `register_template_output` |
+| Template | Either of the above, rendered from a React template | `registerTemplateOutput` | `register_template_output` |
 
 Every output takes:
 

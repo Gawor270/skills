@@ -1,6 +1,6 @@
 ---
 name: fishjam-composition
-description: "Fishjam compositions: server-side, real-time mixing of several live streams (room peers, WHIP, RTMP, MP4) into new output streams with layouts, overlays, captions, and audio mixes, built on Smelter. Covers lifecycle and billing, static scenes, React templates, composing a room, and the raw Composition API. Use when building a grid or picture-in-picture of a call, restreaming a room to a livestream or to YouTube / Twitch over RTMP, or adding overlays or captions driven from a backend. Trigger on: 'Fishjam composition', 'compose a room', 'CompositionClient', 'createComposition', 'create_composition', 'registerWhipOutput', 'register_whip_output', 'registerTemplateOutput', 'register_template_output', 'updateOutput', 'update_output', 'forwardRoomTracks', 'forward_room_tracks', 'track_forwardings', 'sendEvent', 'send_event', '@fishjam-cloud/composition', '@fishjam-cloud/composition-cli', 'usePeers', 'eventBus', 'rtc.fishjam.io', 'Smelter'."
+description: "Fishjam compositions: server-side, real-time mixing of several live streams (room peers, WHIP, RTMP, MP4) into new output streams with layouts, overlays, captions, and audio mixes, built on Smelter. Covers lifecycle and billing, static scenes, React templates, composing a room, and the raw Composition API. Use when building a grid or picture-in-picture of a call, restreaming a room to a livestream or to YouTube / Twitch over RTMP, or adding overlays or captions driven from a backend. Trigger on: 'Fishjam composition', 'compose a room', 'CompositionClient', 'createComposition', 'create_composition', 'registerWhipOutput', 'register_whip_output', 'registerTemplateOutput', 'register_template_output', 'updateOutput', 'update_output', 'forwardRoomTracks', 'forward_room_tracks', 'track_forwardings', '@fishjam-cloud/composition', '@fishjam-cloud/composition-cli', 'rtc.fishjam.io', 'Smelter'."
 license: MIT
 ---
 
@@ -14,9 +14,9 @@ Because the layout is rendered once on the server, every viewer receives one rea
 
 ## What you can build
 
-- **A video call turned into a broadcast.** The room's participants in a grid or speaker layout, with names, speaking highlights, and camera-off placeholders, streamed to a livestream audience in your app.
+- **A video call turned into a broadcast.** The room's participants in a grid, speaker, or picture-in-picture layout, with names, speaking highlights, and camera-off placeholders, streamed to a livestream audience in your app.
 - **Restreaming.** A call, an OBS feed, or any other input sent to YouTube, Twitch, or another RTMP platform.
-- **Broadcast graphics driven by your backend.** A LIVE badge, captions, lower thirds, sponsor banners, or a score bug, toggled as things happen in your product.
+- **Overlays and broadcast graphics driven by your backend.** A LIVE badge, captions, lower thirds, sponsor banners, or a score bug, toggled as things happen in your product.
 - **A standby or placeholder channel.** Graphics only, or a looping video, switched to the live layout when the show starts. An output shows one scene at a time; events or updates switch it.
 
 ## Mental model
@@ -31,10 +31,10 @@ MP4 file URL ─────────────┘
 
 | Concept | What it is |
 |---|---|
-| **Composition** | One billed rendering session on the Composition API (`https://rtc.fishjam.io`), authenticated with the management token (`../platform/auth-model.md`). Holds inputs, outputs, and assets. |
+| **Composition** | A rendering workspace on the Composition API (`https://rtc.fishjam.io`), authenticated with the management token (`../platform/auth-model.md`). Holds inputs, outputs, and assets; billing is per input and output, not per composition. |
 | **Input** | A stream coming in, addressed by an `input_id` you choose. Registered by you (WHIP, WHEP, RTMP, MP4) or created for you when a Fishjam room is forwarded. |
 | **Output** | A stream going out, addressed by an `output_id` you choose. Pushes over WHIP or RTMP. Each output renders its own scene. |
-| **Template** | A React component, built into a JS bundle and uploaded with an output, that renders the output's scene and re-renders when room peers change or your backend sends an event. |
+| **Template** | A bundled React component, uploaded while registering a template output, that controls the output's scene and re-renders when its state changes. Can react to room events or events sent by your backend. |
 | **Static scene** | The alternative to a template: a JSON component tree (`view`, `tiles`, `rescaler`, `input_stream`, `text`, `image`) plus an audio mix, sent by your backend. |
 | **Assets** | Images (registered by URL) and fonts (uploaded), usable from templates and scenes. |
 

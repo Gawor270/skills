@@ -1,8 +1,8 @@
 # Static Scenes
 
-A scene is a description of what an output shows. With a static scene, your backend builds it as JSON, sends it when the output is registered, and replaces it with `updateOutput` whenever the layout should change. Use it for a fixed layout of inputs you know up front.
+A scene is a description of what an output shows. With a static scene, your backend builds it as JSON, sends it when the output is registered, and replaces it with `updateOutput` whenever the layout should change. A static scene can change as often as you like; it is the simpler choice when the layout is fixed or changes rarely, with inputs you know up front.
 
-A template produces the same kind of scene: every time it renders, the output's scene is replaced with the result. The only difference is who builds the scene, your backend or the template. When the layout depends on who is in a room or reacts to events, use a template (`templates.md`).
+A template produces the same kind of scene: every time it renders, the output's scene is replaced with the result. The only difference is who builds the scene, your backend or the template. When the layout depends on who is in a room or reacts to events, use a template (`templates.md`): React state and re-rendering replace the imperative code your backend would otherwise need to track changes and resend scenes.
 
 ## Scene shape
 

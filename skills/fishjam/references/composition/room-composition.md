@@ -10,7 +10,7 @@ await fishjamClient.forwardRoomTracks(roomId, compositionClient.compositionUrl(c
 
 Python: `fishjam_client.forward_room_tracks(room.id, composition_client.composition_url(composition_id))`.
 
-- **One call covers the whole room.** Fishjam registers an input for each peer's media as it starts publishing and removes it when it stops. Never register room inputs yourself.
+- **One method call covers the whole room.** Fishjam registers an input for each peer's media as it starts publishing and removes it when it stops. Never register room inputs yourself.
 - **A peer's camera and microphone arrive as one input**, and a screen share with its audio as another. Templates see them as `cameraStream` and `screenShareStream` (`templates.md`).
 - **Forwarded inputs are not billed** as composition inputs; the room is billed as usual.
 - **A room and a composition pair one to one.** Create one composition per room you want to compose, and put everything that room needs (for example several outputs) into that composition. Calling `forwardRoomTracks` again with the same pair is harmless.
@@ -25,7 +25,7 @@ Python: `fishjam_client.forward_room_tracks(room.id, composition_client.composit
 4. **Create the destination and register the template output**, with an `audio` config so peers are heard.
 5. **Forward the room.**
 6. **Start the composition.**
-7. **Send the template's current state** as events, if it uses any.
+7. **Send the starting events**, if the template listens for any. A template only knows what it received through `sendEvent`, so anything it should show from the first frame (a caption, a LIVE badge) has to be sent after start.
 
 Why these options:
 

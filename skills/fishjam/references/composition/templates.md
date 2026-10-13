@@ -1,8 +1,8 @@
 # Composition Templates
 
-A template is a React component that renders one output's scene. It runs inside the composition, next to the renderer, and re-renders when room peers change or your backend sends an event. The backend only deploys it and sends events; it never rebuilds scenes.
+A template is a React component that renders one output's scene. It uses layout components from `@swmansion/smelter` and room hooks from `@fishjam-cloud/composition`. It runs in an isolated JS runtime inside the composition, next to the renderer, and re-renders when room peers change or your backend sends an event. The backend only deploys it and sends events; it never rebuilds scenes.
 
-Templates are always TypeScript and React. A Python backend deploys the same built bundle as a Node backend.
+Templates are built using React and TypeScript. Python or other backends deploy the same JS bundle as a Node backend.
 
 ## Scaffold and build
 
